@@ -60,6 +60,8 @@ const tilesOfBag = Array(12)
     Array(1).fill('Z')
   );
 console.log(tilesOfBag);
+
+
 let item = tilesOfBag[Math.floor(Math.random() * tilesOfBag.length)];
 console.log(item);
 
