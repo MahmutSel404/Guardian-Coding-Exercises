@@ -6,7 +6,6 @@ let play_credit = 20; //cost of a play
 let no_of_free_play = 0;
 let coefficient = 1;
 const symbols = ['black', 'white', 'green', 'yellow'];
-const no_of_slots = 4;
 
 function check_difference(slots) {
   for (let i = 0; i < 4; i++) {
@@ -65,6 +64,7 @@ function play(user_credit, money_in_machine) {
         no_of_free_play + (5 * play_credit - money_in_machine) / play_credit;
       user_credit = user_credit + money_in_machine;
       money_in_machine = 0;
+    
     }
     return [user_credit, money_in_machine, no_of_free_play];
   }
