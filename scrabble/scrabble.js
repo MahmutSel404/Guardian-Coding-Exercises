@@ -59,7 +59,7 @@ const tilesOfBag = Array(12)
     Array(1).fill('Q'),
     Array(1).fill('Z')
   );
-console.log(tilesOfBag);
+console.log( 'update',tilesOfBag);
 
 
 let item = tilesOfBag[Math.floor(Math.random() * tilesOfBag.length)];
