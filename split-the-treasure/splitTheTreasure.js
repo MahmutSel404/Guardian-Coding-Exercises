@@ -1,40 +1,31 @@
-let treasure = [27, 7, 20];
+const Iter = require('es-iter');
+
+let treasure = [6, 3, 2, 4, 1];  //#[3,3,3,3,2,2,2,2,2,2,2,2]  #[6,3,2,4,1] #[4,4,4]  #[27,7,20] --> (20,7)+(27)
 
 let totalTreasure = treasure.reduce((a, b) => a + b, 0);
 
-function subset_sum(treasure, each, partial) {
-  let s;
-  if (!partial.length == 0) {
-    s = partial.reduce((a, b) => a + b, 0);
-  }
-  //let s = 27
-  //check if the partial sum is equals to target
-  if (s == each) {
-    console.log(partial, each);
-  }
-  if (s >= each) {
-    return false;
-  }
-
-  for (let i = 0; i < treasure.length-1; i++) {
-    let n = treasure[i];
-    let remaining = treasure.slice(i);
-    console.log(remaining);
+console.log('Total Treasure:',totalTreasure)
 
 
-    subset_sum(remaining, each, partial.concat([n]));
-  }
-}
-
-let each;
-for (let i = 2; i <= treasure.length; i++) {
-  each = totalTreasure / i;
-  //console.log(each);
-  let partial = [];
-  subset_sum(treasure, each, partial);
-}
-// let a = 56.5;
-// if (a%1==0) {
-//     a = Number(a)
-//     console.log(a)
+// for (let i=0; i<treasure.length; i++){
+//   for()
 // }
+
+
+for(let no_crew = 2; no_crew<=treasure.length; no_crew++){
+  each = totalTreasure / no_crew;
+  console.log("e",each)
+
+  for (let i = 0; i <= treasure.length; i++) {
+    let tresComb = new Iter(treasure).combinations(i);
+    for (let element of tresComb) {
+      elementSum = element.reduce((a, b) => a + b, 0);
+
+      if (elementSum ==each){
+        console.log(element, elementSum);
+      }
+      
+    }
+  }
+
+}
