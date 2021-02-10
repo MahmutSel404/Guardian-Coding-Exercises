@@ -1,7 +1,9 @@
+const { toStatement } = require('@babel/types');
+const { doesNotReject } = require('assert');
 const fetch = require('node-fetch');
-
+const Iter = require('es-iter');
 //GIVEN 1
-const dict = {
+const dictionary = {
   A: 1,
   B: 3,
   C: 3,
@@ -59,15 +61,68 @@ const tilesOfBag = Array(12)
     Array(1).fill('Q'),
     Array(1).fill('Z')
   );
-console.log( 'update',tilesOfBag);
+//random words
+let sevenTiles = '';
 
+for (let i = 0; i < 7; i++) {
+  let item = tilesOfBag[Math.floor(Math.random() * tilesOfBag.length)];
+  sevenTiles += item;
+}
+console.log('random words', sevenTiles);
 
-let item = tilesOfBag[Math.floor(Math.random() * tilesOfBag.length)];
-console.log(item);
+//total score of tiles
+function scrabble_score(word) {
+  let total = 0;
+  for (const letter of word) {
+    total += dictionary[letter];
+  }
+  return total;
+}
+total = scrabble_score(sevenTiles);
+console.log('total score of letters', total);
 
+//permutation
+let permutation_list = [];
+for (let i = 0; i <= sevenTiles.length; i++) {
+  permutation_list.push(new Iter(sevenTiles).permutations(i));
+}
+// for (const element of permutation_list) {
+//   for (const element2 of element) {
+//     console.log(element2);
+//   }
+// }
+let element;
 //GIVEN 3
 fetch(
   'https://raw.githubusercontent.com/guardian/coding-exercises/main/scrabble/dictionary.txt'
 )
   .then((response) => response.text())
-  .then((text) => console.log(text))
+  .then((text) => {
+    let words = text.split('\n');
+    let n = 0;
+    for (let elements_list of permutation_list) {
+      for (let element of elements_list) {
+        n = n + 1;
+        element = element.join('');
+
+        if (words == element) {
+          console.log("got ıt")
+        }
+
+        // for (j of element) {
+        //   console.log('>>', j);
+        //   // if (words.includes(j)) {
+        //   //   console.log('selam');
+        //   // }
+        // }
+      }
+    }
+    // for (const word of words) {
+    //   console.log(word);
+    // }
+  });
+
+  let words2 = ["her","hel","hello"]
+  if (words2.includes('he')) {
+          console.log('selam');
+        }

@@ -13,6 +13,7 @@ function make2Darray(cols, rows) {
   return arr;
 }
 
+
 function setup() {
   createCanvas(600, 400);
   cols = width / resolution;
